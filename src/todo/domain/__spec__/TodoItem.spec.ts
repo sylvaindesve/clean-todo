@@ -1,6 +1,6 @@
-import { TodoItem } from "./TodoItem";
-import { TodoItemDescription } from "./TodoItemDescription";
-import { TodoItemId } from "./TodoItemId";
+import { TodoItem } from "../TodoItem";
+import { TodoItemDescription } from "../TodoItemDescription";
+import { TodoItemId } from "../TodoItemId";
 
 describe("TodoItem", () => {
 

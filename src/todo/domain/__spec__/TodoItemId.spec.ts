@@ -1,5 +1,5 @@
-import { Guid } from "../../shared/Guid";
-import { TodoItemId } from "./TodoItemId";
+import { Guid } from "../../../shared/Guid";
+import { TodoItemId } from "../TodoItemId";
 
 describe("TodoItemId", () => {
 

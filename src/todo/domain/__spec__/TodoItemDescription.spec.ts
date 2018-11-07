@@ -1,4 +1,4 @@
-import { TodoItemDescription } from "./TodoItemDescription";
+import { TodoItemDescription } from "../TodoItemDescription";
 
 describe("TodoItemDescription", () => {
 
