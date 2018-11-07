@@ -30,3 +30,11 @@ directory is shared with the container so that it is not necessary to rebuild
 the image each time the source code is changed. The test report is also shared.
 
 The image should be rebuilt if any other file is modified.
+
+## Project Log
+
+### Step 1: Walking skeletton and MVP
+
+First step is to build a walking skeleton (the full DDD-CQRS-ES architecture) supporting a MVP : we just want to add and view items. The ubiquitous language is the following:
+
+> An **Item** has a **Description**. Items can be **Added**.
