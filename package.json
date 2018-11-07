@@ -1,0 +1,24 @@
+{
+  "name": "clean-todo",
+  "version": "0.0.1",
+  "description": "Learning Domain Driven Design, Command Query Responsibility Segregation and Event Sourcing",
+  "author": "Sylvain Desvé <sylvain.desve@gmail.com>",
+  "homepage": "https://github.com/sylvaindesve/clean-todo/blob/master/README.md",
+  "license" : "GPL-3.0-or-later",
+  "repository": "github:sylvaindesve/clean-todo",
+  "scripts": {
+    "compile": "tsc",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/node": "^10.12.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.9",
+    "jest": "^23.6.0",
+    "jest-html-reporter": "^2.4.2",
+    "ts-jest": "^23.10.4",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.6"
+  }
+}

@@ -1,0 +1,9 @@
+version: '2'
+services:
+
+  test:
+    build: .
+    volumes:
+      - ./src:/usr/app/src
+      - ./test-report.html:/usr/app/test-report.html
+    command: npm test
