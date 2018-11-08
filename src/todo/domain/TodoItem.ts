@@ -5,7 +5,7 @@ import { UuidIdentity } from "../../shared/UuidIdentity";
 import { TodoItemAdded } from "./TodoItemAdded";
 import { TodoItemDescription } from "./TodoItemDescription";
 
-export class TodoItem extends AggregateRoot implements IEntity<TodoItem> {
+export class TodoItem extends AggregateRoot<UuidIdentity> implements IEntity<TodoItem> {
 
   public static create(id: UuidIdentity, description: TodoItemDescription) {
     const newTodoItem = new TodoItem(id);

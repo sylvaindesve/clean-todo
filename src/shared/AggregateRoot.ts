@@ -1,19 +1,11 @@
+import { Entity } from "./Entity";
 import { IDomainEvent } from "./IDomainEvent";
-import { UuidIdentity } from "./UuidIdentity";
+import { IIdentity } from "./IIdentity";
 
 // Inpsired from https://github.com/gregoryyoung/m-r/blob/master/SimpleCQRS/Domain.cs
-export abstract class AggregateRoot {
+export abstract class AggregateRoot<T extends IIdentity> extends Entity<T> {
 
-  private readonly _id: UuidIdentity;
   private readonly _uncommittedEvents: IDomainEvent[] = [];
-
-  constructor(id: UuidIdentity) {
-    this._id = id;
-  }
-
-  public getId(): UuidIdentity {
-    return this._id;
-  }
 
   public getUncommittedEvents(): IDomainEvent[] {
     return this._uncommittedEvents;
