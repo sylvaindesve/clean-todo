@@ -1,12 +1,17 @@
+import { UuidIdentity } from "../../../shared/UuidIdentity";
 import { TodoItem } from "../TodoItem";
 import { TodoItemDescription } from "../TodoItemDescription";
-import { TodoItemId } from "../TodoItemId";
 
 describe("TodoItem", () => {
 
   it("can be created with an ID and a description", () => {
-    const item: TodoItem = new TodoItem(TodoItemId.generate(), new TodoItemDescription("Some item"));
-    expect(item.getDescription().sameValueAs(new TodoItemDescription("Some item"))).toBeTruthy();
+    const id = UuidIdentity.create();
+    const description = new TodoItemDescription("This is a test");
+    const item: TodoItem = TodoItem.create(id, description);
+
+    expect(item.getId().equals(id)).toBeTruthy();
+    expect(item.getDescription()!.sameValueAs(description)).toBeTruthy();
+    expect(item.getUncommittedEvents().length).toBe(1);
   });
 
 });

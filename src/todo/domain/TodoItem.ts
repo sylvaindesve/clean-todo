@@ -1,27 +1,33 @@
+import { AggregateRoot } from "../../shared/AggregateRoot";
+import { IDomainEvent } from "../../shared/IDomainEvent";
 import { IEntity } from "../../shared/IEntity";
+import { UuidIdentity } from "../../shared/UuidIdentity";
+import { TodoItemAdded } from "./TodoItemAdded";
 import { TodoItemDescription } from "./TodoItemDescription";
-import { TodoItemId } from "./TodoItemId";
 
-export class TodoItem implements IEntity<TodoItem> {
+export class TodoItem extends AggregateRoot implements IEntity<TodoItem> {
 
-  private todoItemId: TodoItemId;
-  private todoItemDescription: TodoItemDescription;
-
-  constructor(todoItemId: TodoItemId, todoItemDescription: TodoItemDescription) {
-    this.todoItemId = todoItemId;
-    this.todoItemDescription = todoItemDescription;
+  public static create(id: UuidIdentity, description: TodoItemDescription) {
+    const newTodoItem = new TodoItem(id);
+    newTodoItem.applyEvent(new TodoItemAdded(id, description.descriptionString));
+    return newTodoItem;
   }
 
-  public getId(): TodoItemId {
-    return this.todoItemId;
-  }
+  private _description: TodoItemDescription | null = null;
 
-  public getDescription(): TodoItemDescription {
-    return this.todoItemDescription;
+  public getDescription(): TodoItemDescription | null {
+    return this._description;
   }
 
   public sameIdentityAs(other: TodoItem): boolean {
-    return this.todoItemId.sameValueAs(other.todoItemId);
+    return this.getId().equals(other.getId());
+  }
+
+  // Never call this one as it is called by `applyEvent`
+  protected apply(event: IDomainEvent): void {
+    if (event instanceof TodoItemAdded) {
+      this._description = new TodoItemDescription((event as TodoItemAdded).description);
+    }
   }
 
 }
