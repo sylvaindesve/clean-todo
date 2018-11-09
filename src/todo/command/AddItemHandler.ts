@@ -12,7 +12,7 @@ export class AddItemHandler implements ICommandHandler {
   public handle(command: AddItem): CommandResponse {
     const id = UuidIdentity.create();
     const [newTodoItem, events] = TodoItem.create(id, new TodoItemDescription(command.description));
-    return new CommandResponse(id.toString(), events);
+    return CommandResponse.withValue(id.toString(), events);
   }
 
   public listenTo(): string {
