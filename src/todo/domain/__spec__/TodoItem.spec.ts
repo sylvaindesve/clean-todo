@@ -1,5 +1,5 @@
-import { IDomainEvent } from "../../../shared/IDomainEvent";
-import { UuidIdentity } from "../../../shared/UuidIdentity";
+import { IDomainEvent } from "../../../shared/domain/IDomainEvent";
+import { UuidIdentity } from "../../../shared/domain/UuidIdentity";
 import { TodoItem } from "../TodoItem";
 import { TodoItemAdded } from "../TodoItemAdded";
 import { TodoItemDescription } from "../TodoItemDescription";

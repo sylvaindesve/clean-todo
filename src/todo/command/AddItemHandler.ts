@@ -2,7 +2,7 @@ import { ClassUtil } from "../../shared/ClassUtil";
 import { CommandResponse } from "../../shared/command/CommandResponse";
 import { ICommand } from "../../shared/command/ICommand";
 import { ICommandHandler } from "../../shared/command/ICommandHandler";
-import { UuidIdentity } from "../../shared/UuidIdentity";
+import { UuidIdentity } from "../../shared/domain/UuidIdentity";
 import { TodoItem } from "../domain/TodoItem";
 import { TodoItemDescription } from "../domain/TodoItemDescription";
 import { AddItem } from "./AddItem";

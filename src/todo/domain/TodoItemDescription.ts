@@ -1,4 +1,4 @@
-import { IValueObject } from "../../shared/IValueObject";
+import { IValueObject } from "../../shared/domain/IValueObject";
 
 // Description of a Todo item
 export class TodoItemDescription implements IValueObject<TodoItemDescription> {
