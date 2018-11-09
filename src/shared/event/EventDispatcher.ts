@@ -1,7 +1,7 @@
-import { IEventStore } from "../../ports/IEventStore";
 import { ICommand } from "../command/ICommand";
 import { ICommandBusMiddleware } from "../command/ICommandBusMiddleware";
 import { ICommandResponse } from "../command/ICommandResponse";
+import { IEventStore } from "./IEventStore";
 
 export class EventDispatcher implements ICommandBusMiddleware {
 

@@ -1,5 +1,4 @@
 // tslint:disable:max-classes-per-file
-import { IEventStore } from "../ports/IEventStore";
 import { ClassUtil } from "../shared/ClassUtil";
 import { CommandBus } from "../shared/command/CommandBus";
 import { CommandHandlerDispatcher } from "../shared/command/CommandHandlerDispatcher";
@@ -10,16 +9,26 @@ import { ICommandHandler } from "../shared/command/ICommandHandler";
 import { ICommandResponse } from "../shared/command/ICommandResponse";
 import { IDomainEvent } from "../shared/domain/IDomainEvent";
 import { EventDispatcher } from "../shared/event/EventDispatcher";
+import { IEventStore } from "../shared/event/IEventStore";
 
 class TestCommand implements ICommand {}
 
-class TestEvent implements IDomainEvent {}
+class TestEvent implements IDomainEvent {
+  private _id: string;
+  constructor(id: string) { this._id = id; }
+  public getId() {
+    return {
+      equals: () => true,
+      toString: () => this._id,
+    };
+  }
+}
 
 class TestCommandHandler implements ICommandHandler {
   public handle(command: ICommand): ICommandResponse {
     return CommandResponse.withValue("OK", [
-      { type: "test_event", value: "test 1"},
-      { type: "test_event", value: "test 2"},
+      new TestEvent("test 1"),
+      new TestEvent("test 2"),
     ]);
   }
   public listenTo(): string {
@@ -50,7 +59,7 @@ describe("Storing events along the way", () => {
 
     bus.handle(new TestCommand());
     expect(eventStore.storedEvent.length).toBe(2);
-    expect(eventStore.storedEvent[0]).toEqual({ type: "test_event", value: "test 1"});
+    expect(eventStore.storedEvent[0].getId().toString()).toEqual("test 1");
   });
 
 });
