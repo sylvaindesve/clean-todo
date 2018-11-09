@@ -1,6 +1,6 @@
 {
   "name": "clean-todo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Learning Domain Driven Design, Command Query Responsibility Segregation and Event Sourcing",
   "author": "Sylvain Desvé <sylvain.desve@gmail.com>",
   "homepage": "https://github.com/sylvaindesve/clean-todo/blob/master/README.md",
