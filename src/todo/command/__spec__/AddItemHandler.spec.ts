@@ -1,4 +1,4 @@
-import { CommandResponse } from "../../../shared/CommandResponse";
+import { CommandResponse } from "../../../shared/command/CommandResponse";
 import { TodoItemAdded } from "../../domain/TodoItemAdded";
 import { AddItem } from "../AddItem";
 import { AddItemHandler } from "../AddItemHandler";

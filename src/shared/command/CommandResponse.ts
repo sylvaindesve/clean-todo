@@ -1,5 +1,5 @@
+import { IDomainEvent } from "../IDomainEvent";
 import { ICommandResponse } from "./ICommandResponse";
-import { IDomainEvent } from "./IDomainEvent";
 
 export class CommandResponse implements ICommandResponse {
 

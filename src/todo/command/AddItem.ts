@@ -1,4 +1,4 @@
-import { ICommand } from "../../shared/ICommand";
+import { ICommand } from "../../shared/command/ICommand";
 
 export class AddItem implements ICommand {
 
