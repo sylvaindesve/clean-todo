@@ -2,7 +2,7 @@ import { IDomainEvent } from "../../shared/domain/IDomainEvent";
 import { IIdentity } from "../../shared/domain/IIdentity";
 import { UuidIdentity } from "../../shared/domain/UuidIdentity";
 
-export class TodoItemAdded implements IDomainEvent {
+export class TodoItemDescriptionChangedEvent implements IDomainEvent {
 
   private _id: UuidIdentity;
   private _description: string;

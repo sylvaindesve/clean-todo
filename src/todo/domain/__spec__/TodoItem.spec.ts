@@ -1,7 +1,7 @@
 import { IDomainEvent } from "../../../shared/domain/IDomainEvent";
 import { UuidIdentity } from "../../../shared/domain/UuidIdentity";
 import { TodoItem } from "../TodoItem";
-import { TodoItemAdded } from "../TodoItemAdded";
+import { TodoItemAddedEvent } from "../TodoItemAddedEvent";
 import { TodoItemDescription } from "../TodoItemDescription";
 
 describe("TodoItem", () => {
@@ -14,7 +14,7 @@ describe("TodoItem", () => {
     expect(item.getId().equals(id)).toBeTruthy();
     expect(item.getDescription()!.sameValueAs(description)).toBeTruthy();
     expect(events.length).toBe(1);
-    expect(events[0] instanceof TodoItemAdded).toBeTruthy();
+    expect(events[0] instanceof TodoItemAddedEvent).toBeTruthy();
   });
 
 });

@@ -2,13 +2,13 @@ import { CommandResponse } from "../../../shared/command/CommandResponse";
 import { UuidIdentity } from "../../../shared/domain/UuidIdentity";
 import { ITodoItemRepository } from "../../domain/ITodoItemRepository";
 import { TodoItem } from "../../domain/TodoItem";
-import { TodoItemDescriptionChanged } from "../../domain/TodoItemDescriptionChanged";
+import { TodoItemDescriptionChangedEvent } from "../../domain/TodoItemDescriptionChangedEvent";
 import { ChangeItemDescriptionCommand} from "../ChangeItemDescriptionCommand";
 import { ChangeItemDescriptionCommandHandler } from "../ChangeItemDescriptionCommandHandler";
 
 describe("ChangeItemDescriptionCommandHandler", () => {
 
-  it("returns the item ID and a TodoItemDescriptionChanged event", () => {
+  it("returns the item ID and a TodoItemDescriptionChangedEvent event", () => {
     const Mock = jest.fn<ITodoItemRepository>(() => ({
       get: jest.fn(),
     }));
@@ -23,9 +23,9 @@ describe("ChangeItemDescriptionCommandHandler", () => {
     expect(response.getValue()).toEqual(id.toString());
     expect(response.hasEvents()).toBeTruthy();
     expect(response.getEvents().length).toBe(1);
-    expect(response.getEvents()[0] instanceof TodoItemDescriptionChanged).toBeTruthy();
-    expect((response.getEvents()[0] as TodoItemDescriptionChanged).getId().equals(id)).toBeTruthy();
-    expect((response.getEvents()[0] as TodoItemDescriptionChanged).getDescription()).toEqual("This is a description");
+    expect(response.getEvents()[0] instanceof TodoItemDescriptionChangedEvent).toBeTruthy();
+    expect((response.getEvents()[0] as TodoItemDescriptionChangedEvent).getId().equals(id)).toBeTruthy();
+    expect((response.getEvents()[0] as TodoItemDescriptionChangedEvent).getDescription()).toEqual("This is a description");
   });
 
 });
