@@ -2,10 +2,10 @@ import { CommandBus } from "../shared/command/CommandBus";
 import { CommandHandlerDispatcher } from "../shared/command/CommandHandlerDispatcher";
 import { UuidIdentity } from "../shared/domain/UuidIdentity";
 import { EventDispatcher } from "../shared/event/EventDispatcher";
-import { AddItem } from "../todo/command/AddItem";
-import { AddItemHandler } from "../todo/command/AddItemHandler";
-import { ChangeItemDescription } from "../todo/command/ChangeItemDescription";
-import { ChangeItemDescriptionHandler } from "../todo/command/ChangeItemDescriptionHandler";
+import { AddItemCommand } from "../todo/command/AddItemCommand";
+import { AddItemCommandHandler } from "../todo/command/AddItemCommandHandler";
+import { ChangeItemDescriptionCommand } from "../todo/command/ChangeItemDescriptionCommand";
+import { ChangeItemDescriptionCommandHandler } from "../todo/command/ChangeItemDescriptionCommandHandler";
 import { InMemoryEventStore } from "./InMemoryEventStore";
 
 describe("Item features", () => {
@@ -18,8 +18,8 @@ describe("Item features", () => {
     eventStore = new InMemoryEventStore();
 
     commandDispatcher = new CommandHandlerDispatcher();
-    commandDispatcher.registerHandler(new AddItemHandler());
-    commandDispatcher.registerHandler(new ChangeItemDescriptionHandler(eventStore));
+    commandDispatcher.registerHandler(new AddItemCommandHandler());
+    commandDispatcher.registerHandler(new ChangeItemDescriptionCommandHandler(eventStore));
 
     bus = new CommandBus([
       new EventDispatcher(eventStore),
@@ -28,14 +28,14 @@ describe("Item features", () => {
   });
 
   test("An item can be added", () => {
-    const id = bus.handle(new AddItem("A new item")).getValue();
+    const id = bus.handle(new AddItemCommand("A new item")).getValue();
     const item = eventStore.get(new UuidIdentity(id));
     expect(item.getDescription()!.descriptionString).toEqual("A new item");
   });
 
   test("The description of an item can be changed", () => {
-    const id = bus.handle(new AddItem("A new item")).getValue();
-    bus.handle(new ChangeItemDescription(id.toString(), "Description changed"));
+    const id = bus.handle(new AddItemCommand("A new item")).getValue();
+    bus.handle(new ChangeItemDescriptionCommand(id.toString(), "Description changed"));
     const item = eventStore.get(new UuidIdentity(id));
     expect(item.getDescription()!.descriptionString).toEqual("Description changed");
   });

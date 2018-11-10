@@ -1,8 +1,9 @@
 import { ICommand } from "../../shared/command/ICommand";
 
-export class AddItem implements ICommand {
+export class ChangeItemDescriptionCommand implements ICommand {
 
   constructor(
+    public readonly id: string,
     public readonly description: string,
   ) {}
 

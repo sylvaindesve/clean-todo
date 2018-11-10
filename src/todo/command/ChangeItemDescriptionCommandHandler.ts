@@ -7,9 +7,9 @@ import { UuidIdentity } from "../../shared/domain/UuidIdentity";
 import { ITodoItemRepository } from "../domain/ITodoItemRepository";
 import { TodoItem } from "../domain/TodoItem";
 import { TodoItemDescription } from "../domain/TodoItemDescription";
-import { ChangeItemDescription } from "./ChangeItemDescription";
+import { ChangeItemDescriptionCommand } from "./ChangeItemDescriptionCommand";
 
-export class ChangeItemDescriptionHandler implements ICommandHandler {
+export class ChangeItemDescriptionCommandHandler implements ICommandHandler {
 
   private _todoItemRepository: ITodoItemRepository;
 
@@ -17,7 +17,7 @@ export class ChangeItemDescriptionHandler implements ICommandHandler {
     this._todoItemRepository = repository;
   }
 
-  public handle(command: ChangeItemDescription): CommandResponse {
+  public handle(command: ChangeItemDescriptionCommand): CommandResponse {
     let item = this._todoItemRepository.get(new UuidIdentity(command.id));
     let events: IDomainEvent[];
     [item, events] = item.setDescription(new TodoItemDescription(command.description));
@@ -25,7 +25,7 @@ export class ChangeItemDescriptionHandler implements ICommandHandler {
   }
 
   public listenTo(): string {
-    return ClassUtil.nameOf(ChangeItemDescription);
+    return ClassUtil.nameOf(ChangeItemDescriptionCommand);
   }
 
 }

@@ -1,13 +1,13 @@
 import { CommandResponse } from "../../../shared/command/CommandResponse";
 import { TodoItemAdded } from "../../domain/TodoItemAdded";
-import { AddItem } from "../AddItem";
-import { AddItemHandler } from "../AddItemHandler";
+import { AddItemCommand } from "../AddItemCommand";
+import { AddItemCommandHandler } from "../AddItemCommandHandler";
 
-describe("AddItemHandler", () => {
+describe("AddItemCommandHandler", () => {
 
   it("returns the new item ID and a TodoItemAdded event", () => {
-    const handler = new AddItemHandler();
-    const response: CommandResponse = handler.handle(new AddItem("This is a description"));
+    const handler = new AddItemCommandHandler();
+    const response: CommandResponse = handler.handle(new AddItemCommand("This is a description"));
     expect(response.getValue() == null).toBeFalsy();
     expect(response.hasEvents()).toBeTruthy();
     expect(response.getEvents().length).toBe(1);

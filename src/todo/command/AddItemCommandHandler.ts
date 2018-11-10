@@ -5,18 +5,18 @@ import { ICommandHandler } from "../../shared/command/ICommandHandler";
 import { UuidIdentity } from "../../shared/domain/UuidIdentity";
 import { TodoItem } from "../domain/TodoItem";
 import { TodoItemDescription } from "../domain/TodoItemDescription";
-import { AddItem } from "./AddItem";
+import { AddItemCommand } from "./AddItemCommand";
 
-export class AddItemHandler implements ICommandHandler {
+export class AddItemCommandHandler implements ICommandHandler {
 
-  public handle(command: AddItem): CommandResponse {
+  public handle(command: AddItemCommand): CommandResponse {
     const id = UuidIdentity.create();
     const [newTodoItem, events] = TodoItem.create(id, new TodoItemDescription(command.description));
     return CommandResponse.withValue(id.toString(), events);
   }
 
   public listenTo(): string {
-    return ClassUtil.nameOf(AddItem);
+    return ClassUtil.nameOf(AddItemCommand);
   }
 
 }
