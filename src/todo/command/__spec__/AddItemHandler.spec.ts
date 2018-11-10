@@ -7,11 +7,12 @@ describe("AddItemHandler", () => {
 
   it("returns the new item ID and a TodoItemAdded event", () => {
     const handler = new AddItemHandler();
-    const response: CommandResponse = handler.handle(new AddItem("This is a test"));
+    const response: CommandResponse = handler.handle(new AddItem("This is a description"));
     expect(response.getValue() == null).toBeFalsy();
     expect(response.hasEvents()).toBeTruthy();
     expect(response.getEvents().length).toBe(1);
     expect(response.getEvents()[0] instanceof TodoItemAdded).toBeTruthy();
+    expect((response.getEvents()[0] as TodoItemAdded).getDescription()).toEqual("This is a description");
   });
 
 });
