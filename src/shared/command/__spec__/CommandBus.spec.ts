@@ -8,20 +8,20 @@ import { ICommandResponse } from "../ICommandResponse";
 class MiddleWare1 implements ICommandBusMiddleware {
   public dispatch(command: ICommand, nextMiddleware?: ICommandBusMiddleware): ICommandResponse {
     const response = nextMiddleware!.dispatch(command);
-    return CommandResponse.withValue(response.getValue() + " went through 1");
+    return CommandResponse.ack(response.getValue() + " went through 1");
   }
 }
 
 class MiddleWare2 implements ICommandBusMiddleware {
   public dispatch(command: ICommand, nextMiddleware?: ICommandBusMiddleware): ICommandResponse {
     const response = nextMiddleware!.dispatch(command);
-    return CommandResponse.withValue(response.getValue() + " went through 2");
+    return CommandResponse.ack(response.getValue() + " went through 2");
   }
 }
 
 class LastMiddleWare implements ICommandBusMiddleware {
   public dispatch(command: ICommand, nextMiddleware?: ICommandBusMiddleware): ICommandResponse {
-    return CommandResponse.withValue("OK");
+    return CommandResponse.ack("OK");
   }
 }
 

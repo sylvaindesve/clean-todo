@@ -3,5 +3,5 @@ import { TodoItem } from "./TodoItem";
 
 // Secondary/Driven port
 export interface ITodoItemRepository {
-  get(id: UuidIdentity): TodoItem;
+  get(id: UuidIdentity): TodoItem | null;
 }

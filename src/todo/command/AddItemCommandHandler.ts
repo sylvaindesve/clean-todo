@@ -10,9 +10,13 @@ import { AddItemCommand } from "./AddItemCommand";
 export class AddItemCommandHandler implements ICommandHandler {
 
   public handle(command: AddItemCommand): CommandResponse {
-    const id = UuidIdentity.create();
-    const [newTodoItem, events] = TodoItem.create(id, new TodoItemDescription(command.description));
-    return CommandResponse.withValue(id.toString(), events);
+    try {
+      const id = UuidIdentity.create();
+      const [newTodoItem, events] = TodoItem.create(id, new TodoItemDescription(command.description));
+      return CommandResponse.ack(id.toString(), events);
+    } catch (e) {
+      return CommandResponse.nak((e as Error).message);
+    }
   }
 
   public listenTo(): string {

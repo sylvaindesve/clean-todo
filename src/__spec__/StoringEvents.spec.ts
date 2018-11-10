@@ -26,7 +26,7 @@ class TestEvent implements IDomainEvent {
 
 class TestCommandHandler implements ICommandHandler {
   public handle(command: ICommand): ICommandResponse {
-    return CommandResponse.withValue("OK", [
+    return CommandResponse.ack("OK", [
       new TestEvent("test 1"),
       new TestEvent("test 2"),
     ]);

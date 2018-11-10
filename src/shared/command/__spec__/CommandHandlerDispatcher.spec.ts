@@ -11,7 +11,7 @@ class TestCommand2 implements ICommand {}
 
 class TestCommandHandler implements ICommandHandler {
   public handle(command: ICommand): ICommandResponse {
-    return CommandResponse.withValue("OK");
+    return CommandResponse.ack("OK");
   }
   public listenTo(): string { return ClassUtil.nameOf(TestCommand); }
 }

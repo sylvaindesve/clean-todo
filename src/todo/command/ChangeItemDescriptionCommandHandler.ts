@@ -19,9 +19,17 @@ export class ChangeItemDescriptionCommandHandler implements ICommandHandler {
 
   public handle(command: ChangeItemDescriptionCommand): CommandResponse {
     let item = this._todoItemRepository.get(new UuidIdentity(command.id));
-    let events: IDomainEvent[];
-    [item, events] = item.setDescription(new TodoItemDescription(command.description));
-    return CommandResponse.withValue(item.getId().toString(), events);
+    if (item) {
+      let events: IDomainEvent[];
+      try {
+        [item, events] = item.setDescription(new TodoItemDescription(command.description));
+        return CommandResponse.ack(item.getId().toString(), events);
+      } catch (e) {
+        return CommandResponse.nak((e as Error).message);
+      }
+    } else {
+      return CommandResponse.nak("No TodoItem with ID " + command.id);
+    }
   }
 
   public listenTo(): string {
