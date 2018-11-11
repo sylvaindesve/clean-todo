@@ -3,6 +3,8 @@ import { IReadModel } from "./IReadModel";
 
 export interface IQueryHandler {
 
-  execute(query: IQuery): IReadModel | Error;
+  (query: IQuery): IReadModel | Error;
+
+  listenTo: string;
 
 }
