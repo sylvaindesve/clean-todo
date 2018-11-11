@@ -2,27 +2,30 @@ import { CommandBus } from "../shared/command/CommandBus";
 import { CommandHandlerDispatcher } from "../shared/command/CommandHandlerDispatcher";
 import { UuidIdentity } from "../shared/domain/UuidIdentity";
 import { EventDispatcher } from "../shared/event/EventDispatcher";
+import { InMemoryEventStore } from "../testing/InMemoryEventStore";
+import { SimpleEventBus } from "../testing/SimpleEventBus";
 import { AddItemCommand } from "../todo/command/AddItemCommand";
 import { AddItemCommandHandler } from "../todo/command/AddItemCommandHandler";
 import { ChangeItemDescriptionCommand } from "../todo/command/ChangeItemDescriptionCommand";
 import { ChangeItemDescriptionCommandHandler } from "../todo/command/ChangeItemDescriptionCommandHandler";
-import { InMemoryEventStore } from "./InMemoryEventStore";
 
 describe("Item features", () => {
 
   let eventStore: InMemoryEventStore;
+  let eventBus: SimpleEventBus;
   let commandDispatcher: CommandHandlerDispatcher;
   let bus: CommandBus;
 
   beforeEach(() => {
     eventStore = new InMemoryEventStore();
+    eventBus = new SimpleEventBus();
 
     commandDispatcher = new CommandHandlerDispatcher();
     commandDispatcher.registerHandler(new AddItemCommandHandler());
     commandDispatcher.registerHandler(new ChangeItemDescriptionCommandHandler(eventStore));
 
     bus = new CommandBus([
-      new EventDispatcher(eventStore),
+      new EventDispatcher(eventStore, eventBus),
       commandDispatcher,
     ]);
   });

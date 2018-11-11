@@ -45,3 +45,7 @@ is the following:
 
 > An **Item** has a **Description**. Items can be **Added** and their
 > **Description** can be **Changed**.
+
+### Step 3: Listing items
+
+No change to ubiquitous language. Add a feature to list items.
