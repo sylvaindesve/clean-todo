@@ -19,14 +19,14 @@ const testQueryHandler: IQueryHandler = Object.assign((query: IQuery) => {
 
 describe("QueryHandlerDispatcher", () => {
 
-  it("apply registered command handler", () => {
+  it("apply registered query handler", () => {
     const dispatcher = new QueryHandlerDispatcher();
     dispatcher.registerHandler(testQueryHandler);
     const response = dispatcher.dispatch(new TestQuery());
     expect((response as TestReadModel).value).toBe("OK");
   });
 
-  it("throws error if it does not have the right command handler", () => {
+  it("throws error if it does not have the right query handler", () => {
     const dispatcher = new QueryHandlerDispatcher();
     dispatcher.registerHandler(testQueryHandler);
     expect(() => {
